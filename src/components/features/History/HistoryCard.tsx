@@ -14,44 +14,48 @@ export default function HistoryCard({ item, onDelete }: HistoryCardProps) {
   const monthlySavings = calcMonthlySavings(item)
 
   return (
-    <div className={`border-border flex items-center gap-6 border-b px-5 py-4`}>
+    <div className="border-border flex flex-col gap-5 border-b px-4 py-5 sm:flex-row sm:items-center sm:gap-6 sm:px-5 sm:py-4">
       {/* Ícone */}
-      <div className="bg-muted-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
-        <Goal className="text-primary h-5 w-5" />
-      </div>
+      <div className="flex items-center gap-3">
+        <div className="bg-muted-primary flex h-11 w-11 shrink-0 items-center justify-center rounded-xl">
+          <Goal className="text-primary h-5 w-5" />
+        </div>
 
-      {/* Título + data */}
-      <div className="flex min-w-[170px] flex-col">
-        <span className="text-foreground text-sm font-semibold">{item.goalName}</span>
-        <span className="text-muted-foreground text-xs">Simulação salva</span>
+        {/* Título + data */}
+        <div className="flex min-w-0 flex-col sm:min-w-[170px]">
+          <span className="text-foreground truncate text-sm font-semibold">{item.goalName}</span>
+          <span className="text-muted-foreground text-xs">Simulação salva</span>
+        </div>
       </div>
 
       {/* Colunas de informação */}
-      <div className="flex min-w-[110px] flex-col">
-        <span className="text-muted-primary text-[11px] font-semibold uppercase tracking-wide">
-          Custo da meta
-        </span>
-        <span className="text-foreground text-sm font-semibold">{item.goalAmount}</span>
-      </div>
+      <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
+        <div className="flex flex-col sm:min-w-[110px]">
+          <span className="text-muted-primary text-[11px] font-semibold uppercase tracking-wide">
+            Custo da meta
+          </span>
+          <span className="text-foreground text-sm font-semibold">{item.goalAmount}</span>
+        </div>
 
-      <div className="flex min-w-[110px] flex-col">
-        <span className="text-muted-primary text-[11px] font-semibold uppercase tracking-wide">
-          Prazo
-        </span>
-        <span className="text-foreground text-sm font-semibold">{item.goalDeadline} meses</span>
-      </div>
+        <div className="flex flex-col sm:min-w-[110px]">
+          <span className="text-muted-primary text-[11px] font-semibold uppercase tracking-wide">
+            Prazo
+          </span>
+          <span className="text-foreground text-sm font-semibold">{item.goalDeadline} meses</span>
+        </div>
 
-      <div className="flex min-w-[110px] flex-col">
-        <span className="text-muted-primary text-[11px] font-semibold uppercase tracking-wide">
-          Economia mensal
-        </span>
-        <span className="text-foreground text-sm font-semibold">
-          R$ {monthlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
-        </span>
+        <div className="flex flex-col sm:min-w-[110px]">
+          <span className="text-muted-primary text-[11px] font-semibold uppercase tracking-wide">
+            Economia mensal
+          </span>
+          <span className="text-foreground text-sm font-semibold">
+            R$ {monthlySavings.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}
+          </span>
+        </div>
       </div>
 
       {/* Ações */}
-      <div className="border-border ml-auto flex items-center gap-3 border-l pl-4">
+      <div className="border-border flex items-center justify-end gap-3 border-t pt-4 sm:ml-auto sm:border-l sm:border-t-0 sm:pl-4 sm:pt-0">
         <button
           onClick={() => onDelete(item.id)}
           className="rounded-lg p-2 text-red-500 transition-colors hover:bg-red-500/10"

@@ -1,77 +1,41 @@
-# React + TypeScript + Vite
+# Planejai
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Oque é
 
-Currently, two official plugins are available:
+Planejai trata-se de um site responsivo desenvolvido durante o bootcamp da Santander pela DIO para a construção de um site que organiza suas metas e simula, com auxílio de IA, um plano para cumprir os objetivos estabelecidos dentro do seu prazo.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+React
+TypeScript
+Vite
+LocalStorage
+TailwindCSS
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
+### 1. Header
 
-## Expanding the ESLint configuration
+No header, há 3 features principais: Nova simulação, histórico de simulação e theme (Pode mudar pra light ou dark mode)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 2. Nova simulação
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Nesta página, você insere 6 dados:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+1. Renda mensal bruta
+2. Custos fixos de vida
+3. Dívidas/parcelas
+4. Nome da meta
+5. Custo da meta
+6. Tempo para finalizar a meta
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Ao concluir, você é redirecionado para a página de resultados da simulação.
 
-```
+### 3. Resultados da simulação
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Aqui você recebe insights dos dados recebidos na página anterior.
+O diferencial é o card que contém o texto fornecido pela IA especialista para concluir suas metas dentro do prazo.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 4. Histórico
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+Nesta última tela contém todas as informações inseridas do seu usuário no site, permitindo um insight geral, opção de deletar e entrar na tela de resultados de cada simulação.
