@@ -5,6 +5,12 @@ import { type SimulationFormData, type SimulationRecord } from '@/data/simulatio
 const LOCAL_STORAGE_KEY = 'simulation-data'
 
 export const useSimulationStorage = () => {
+  const getAllFormData = useCallback((): SimulationRecord[] => {
+    const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+    return storage ? (JSON.parse(storage) as SimulationRecord[]) : []
+  }, [])
+
   const saveFormData = useCallback((formData: SimulationFormData) => {
     const id = crypto.randomUUID()
     const record: SimulationRecord = { ...formData, id }
@@ -36,9 +42,24 @@ export const useSimulationStorage = () => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated))
   }, [])
 
+  const deleteSimulation = useCallback((id: string) => {
+    const storage = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+    if (!storage) {
+      return
+    }
+
+    const savedData = JSON.parse(storage) as SimulationRecord[]
+    const updated = savedData.filter((record) => record.id !== id)
+
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updated))
+  }, [])
+
   return {
+    getAllFormData,
     saveFormData,
     getFormData,
     updateSimulation,
+    deleteSimulation,
   }
 }

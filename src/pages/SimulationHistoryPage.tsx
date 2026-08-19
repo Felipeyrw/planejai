@@ -1,4 +1,4 @@
-import { HistoryCard } from '@/components/features/History/HistoryCard'
+import { HistoryList } from '@/components/features/History/HistoryList'
 import { PageHero } from '@/components/shared/PageHero'
 
 export function SimulationHistoryPage() {
@@ -8,7 +8,7 @@ export function SimulationHistoryPage() {
         title="Histórico de simulações"
         subtitle="Acompanhe o histórico de seus planos financeiros."
       />
-      <HistoryCard />
+      <HistoryList />
     </main>
   )
 }
