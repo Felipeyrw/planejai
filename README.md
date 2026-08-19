@@ -2,7 +2,7 @@
 
 ## Oque é
 
-Planejai trata-se de um site responsivo desenvolvido durante o bootcamp da Santander pela DIO para a construção de um site que organiza suas metas e simula, com auxílio de IA, um plano para cumprir os objetivos estabelecidos dentro do seu prazo.
+Planejai trata-se de um site responsivo desenvolvido durante o bootcamp da Santander pela DIO de front-end (React + IA). O site organiza suas metas e simula, com auxílio de IA, um plano para cumprir os objetivos estabelecidos dentro do seu prazo.
 
 ## Stack
 
