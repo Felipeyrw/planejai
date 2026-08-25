@@ -1,10 +1,10 @@
 # Planejai
 
-## Oque é
+## What it is
 
-Planejai trata-se de um site responsivo desenvolvido durante o bootcamp da Santander pela DIO de front-end (React + IA). O site organiza suas metas e simula, com auxílio de IA, um plano para cumprir os objetivos estabelecidos dentro do seu prazo.
+Planejai is a responsive website developed during the Santander Front-End Bootcamp (React + AI) by DIO. The application organizes your goals and, with the help of AI, simulates a plan to achieve your target objectives within your timeframe.
 
-## Stack
+## Tech Stack
 
 React
 TypeScript
@@ -16,26 +16,26 @@ TailwindCSS
 
 ### 1. Header
 
-No header, há 3 features principais: Nova simulação, histórico de simulação e theme (Pode mudar pra light ou dark mode)
+The header contains 3 main features: New Simulation, Simulation History, and Theme Switcher (toggle between light and dark mode).
 
-### 2. Nova simulação
+### 2. New Simulation
 
-Nesta página, você insere 6 dados:
+On this page, you input 6 key data points:
 
-1. Renda mensal bruta
-2. Custos fixos de vida
-3. Dívidas/parcelas
-4. Nome da meta
-5. Custo da meta
-6. Tempo para finalizar a meta
+1. Gross monthly income
+2. Fixed living expenses
+3. Debts/installments
+4. Goal name
+5. Goal cost
+6. Target deadline/timeframe
 
-Ao concluir, você é redirecionado para a página de resultados da simulação.
+Upon completion, you are redirected to the simulation results page.
 
-### 3. Resultados da simulação
+### 3. Simulation Results
 
-Aqui você recebe insights dos dados recebidos na página anterior.
-O diferencial é o card que contém o texto fornecido pela IA especialista para concluir suas metas dentro do prazo.
+Here you receive insights based on the data submitted in the previous step.
+The main feature is a dedicated card containing AI-generated expert recommendations to help you reach your goals on time.
 
-### 4. Histórico
+### 4. History
 
-Nesta última tela contém todas as informações inseridas do seu usuário no site, permitindo um insight geral, opção de deletar e entrar na tela de resultados de cada simulação.
+This final screen displays all recorded data for the user, providing an overall overview along with options to delete entries or view the detailed results of any past simulation.
