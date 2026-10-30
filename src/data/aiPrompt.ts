@@ -5,7 +5,7 @@ import type { SimulationRecord } from './simulation'
 
 const RESPONSE_SCHEMA = `{
   "feasibility": {
-    "status": "viable" | "needs_adjustment" | "unfeasible",
+    "status": "viable",
     "content": "<Análise objetiva sobre se a meta é atingível no prazo com o valor disponível. Mencione os números relevantes.>"
   },
   "diagnosis": {
@@ -54,6 +54,7 @@ export function buildAIPrompt(simulation: SimulationRecord) {
     Regras:
     - Todos os textos em português do Brasil
     - Máximo de 4 itens por lista
+    - "feasibility.status" deve ser exatamente "viable", "needs_adjustment" ou "unfeasible"
     - Seja específico ao citar valores calculados
     - Não repita informações entre seções
     - Nunca use markdown dentro dos valores do JSON

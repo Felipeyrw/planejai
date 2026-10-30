@@ -6,30 +6,33 @@ import { useSimulationStorage } from '@/hooks/useSimulationStorage'
 import { type InsightData, getInsight } from '@/services/aiService'
 
 export const useInsight = (id: string) => {
-  const isRequestPending = useRef(false)
   const requestId = useRef(0)
   const { getFormData, updateSimulation } = useSimulationStorage()
 
-  const [insight, setInsight] = useState<InsightData | null>(null)
-
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [insightResult, setInsightResult] = useState<{
+    id: string
+    insight: InsightData
+  } | null>(null)
+  const [loadingId, setLoadingId] = useState<string | null>(null)
+  const [errorResult, setErrorResult] = useState<{ id: string; message: string } | null>(null)
+  const insight = insightResult?.id === id ? insightResult.insight : null
+  const isLoading = loadingId === id
+  const error = errorResult?.id === id ? errorResult.message : null
 
   // Necessário o uso do useCallback pois temos que colocar essa função
   // Como array de dependências do useEffect
   const fetchInsight = useCallback(
     async (simulationId: string) => {
+      const currentRequestId = ++requestId.current
       const simulation = getFormData(simulationId)
 
       if (!simulation) {
-        setError('Simulação não encontrada.')
+        setErrorResult({ id: simulationId, message: 'Simulação não encontrada.' })
         return
       }
 
-      isRequestPending.current = true
-      setIsLoading(true)
-      setError(null)
-      const currentRequestId = ++requestId.current
+      setLoadingId(simulationId)
+      setErrorResult(null)
 
       try {
         const prompt = buildAIPrompt(simulation)
@@ -39,17 +42,26 @@ export const useInsight = (id: string) => {
           return
         }
 
-        setInsight(data)
+        setInsightResult({ id: simulationId, insight: data })
 
         updateSimulation(simulationId, {
           ...simulation,
           insight: data,
         } as SimulationRecord)
-      } catch {
-        setError('Erro ao gerar o diagnóstico. Tente novamente.')
+      } catch (error) {
+        if (currentRequestId === requestId.current) {
+          setErrorResult({
+            id: simulationId,
+            message:
+              error instanceof Error
+                ? error.message
+                : 'Ocorreu um erro inesperado ao gerar o diagnóstico.',
+          })
+        }
       } finally {
-        isRequestPending.current = false
-        setIsLoading(false)
+        if (currentRequestId === requestId.current) {
+          setLoadingId(null)
+        }
       }
     },
     [getFormData, updateSimulation],
@@ -57,16 +69,17 @@ export const useInsight = (id: string) => {
 
   useEffect(() => {
     requestId.current += 1
-    isRequestPending.current = false
-    setInsight(null)
-    setError(null)
+    let isActive = true
+    void Promise.resolve().then(() => {
+      if (isActive) {
+        return fetchInsight(id)
+      }
+    })
 
-    // Evita loop infinito de requisições para a API do Gemini
-    if (isLoading || isRequestPending.current) {
-      return
+    return () => {
+      isActive = false
+      requestId.current += 1
     }
-
-    fetchInsight(id)
   }, [id, fetchInsight])
 
   return { insight, isLoading, error, fetchInsight }
